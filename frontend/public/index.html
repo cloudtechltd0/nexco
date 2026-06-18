@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-slate-50">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NexcoNetworks · Buy Bundles</title>
+     <link rel="icon" type="image/png" href="../img/nexco.png" />
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Inter", "system-ui", "sans-serif"],
+                    },
+                    animation: {
+                        "fade-in":  "fadeIn 0.2s ease-out",
+                        "slide-up": "slideUp 0.25s ease-out",
+                    },
+                    keyframes: {
+                        fadeIn:  { from: { opacity: 0 },                to: { opacity: 1 } },
+                        slideUp: { from: { opacity: 0, transform: "translateY(12px)" },
+                                   to:   { opacity: 1, transform: "translateY(0)" } },
+                    },
+                },
+            },
+        };
+    </script>
+
+    <!-- Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* Smooth momentum scroll on iOS */
+        html { -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
+
+        /* Hide scrollbar on tab strip but keep scroll behaviour */
+        .tabs-strip::-webkit-scrollbar { display: none; }
+        .tabs-strip { -ms-overflow-style: none; scrollbar-width: none; }
+        /* Skeleton shimmer */
+        @keyframes shimmer {
+            0%   { background-position: -400px 0; }
+            100% { background-position: 400px 0; }
+        }
+        .skeleton{
+    background: linear-gradient(
+        90deg,
+        rgba(99,102,241,.15) 25%,
+        rgba(129,140,248,.35) 50%,
+        rgba(99,102,241,.15) 75%
+    );
+    background-size: 800px 100%;
+    animation: shimmer 1.4s infinite linear;
+    border-radius: 1rem;
+    border: 1px solid rgba(255,255,255,.08);
+    backdrop-filter: blur(8px);
+}
+    </style>
+</head>
+
+<body class="min-h-screen font-sans text-slate-800 antialiased relative">
+
+    <div class="fixed inset-0 -z-10">
+        <div class="absolute inset-0 bg-cover bg-center blur-lg scale-110"
+             style="background-image:url('../img/b1.png');">
+        </div>
+
+        <!-- Dark overlay -->
+        <div class="absolute inset-0 bg-black/20"></div>
+    </div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     TOP HEADER — Balance + Network indicator
+═══════════════════════════════════════════════════════════ -->
+<header class="sticky top-0 z-30 bg-indigo-700 text-white shadow-md">
+    <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+
+        <!-- Brand -->
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center
+                        text-lg font-black leading-none select-none">
+                N
+            </div>
+            <span class="font-extrabold text-lg tracking-tight">NexcoWireless</span>
+        </div>
+
+        <!-- Balance + network speed -->
+        <div class="flex items-center gap-3">
+            <!-- Active network tier badge -->
+            <div class="flex items-center gap-1.5 bg-white/15 rounded-full px-3 py-1">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full
+                                 bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                </span>
+                <span class="text-xs font-semibold">5G · <span id="net-speed">250</span>Mbps</span>
+            </div>
+
+            <!-- Wallet balance -->
+            <button aria-label="Wallet balance"
+                    class="flex items-center gap-1.5 bg-white/15 hover:bg-white/25
+                           rounded-full px-3 py-1 transition-colors">
+                <span class="text-xs"><i class="fa fa-shopping-bag"></i></span>
+                <span class="text-xs font-bold" id="header-balance">KES 0</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     HERO STRIP — Quick value proposition
+═══════════════════════════════════════════════════════════ -->
+<section class="bg-gradient-to-b from-indigo-700 to-indigo-800 text-white px-4 pb-8 pt-2">
+    <div class="max-w-3xl mx-auto text-center">
+        <p class="text-indigo-200 text-sm font-medium mb-1">Buy once, browse all day</p>
+        <h1 class="text-2xl sm:text-3xl font-extrabold leading-tight">
+            Data · Voice · SMS bundles<br/>
+            <span class="text-indigo-300">at the lowest rates</span>
+        </h1>
+        <p class="mt-2 text-indigo-300 text-xs">
+            Instant activation · No hidden fees · Valid across all networks
+        </p>
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     MAIN CONTENT
+═══════════════════════════════════════════════════════════ -->
+<main class="max-w-3xl mx-auto px-4 -mt-4 pb-24">
+    <!-- ── Category tabs ──────────────────────────────────────── -->
+    <div class="tabs-strip flex gap-2 overflow-x-auto pb-1 mb-5">
+        <button data-filter="all"
+                class="flex-shrink-0 px-4 py-2 rounded-xl text-sm font-semibold
+                       bg-indigo-600 text-white shadow-sm transition-all duration-150">
+            All
+        </button>
+        <button data-filter="data"
+                class="flex-shrink-0 px-4 py-2 rounded-xl text-sm font-semibold
+                       <button data-filter="data"
+        class="flex-shrink-0 px-4 py-2 rounded-xl text-sm font-semibold
+               bg-white text-slate-500 transition-all duration-150">
+    <i class="fa-solid fa-signal mr-2"></i> Data
+</button>
+
+<button data-filter="minutes"
+        class="flex-shrink-0 px-4 py-2 rounded-xl text-sm font-semibold
+               bg-white text-slate-500 transition-all duration-150">
+    <i class="fa-solid fa-phone mr-2"></i> Minutes
+</button>
+
+<button data-filter="sms"
+        class="flex-shrink-0 px-4 py-2 rounded-xl text-sm font-semibold
+               bg-white text-slate-500 transition-all duration-150">
+    <i class="fa-solid fa-comment-sms mr-2"></i> SMS
+</button>
+
+<button data-filter="combo"
+        class="flex-shrink-0 px-4 py-2 rounded-xl text-sm font-semibold
+               bg-white text-slate-500 transition-all duration-150">
+    <i class="fa-solid fa-bolt mr-2"></i> Combos
+</button>
+    </div>
+
+    <!-- ── Skeleton loader (shown while fetching) ─────────────── -->
+<div id="skeleton-loader"
+     class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4
+            bg-white/5 backdrop-blur-xl
+            border border-white/10
+            rounded-3xl p-4 shadow-2xl">
+        <div class="skeleton h-44"></div>
+        <div class="skeleton h-44"></div>
+        <div class="skeleton h-44"></div>
+        <div class="skeleton h-44"></div>
+    </div>
+
+    <!-- ── Package card grid ──────────────────────────────────── -->
+    <div id="package-grid"
+         class="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-fade-in">
+        <!-- Populated by app.js -->
+    </div>
+
+</main>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PURCHASE MODAL
+═══════════════════════════════════════════════════════════ -->
+<div id="purchase-modal"
+     class="hidden fixed inset-0 z-50 items-end sm:items-center justify-center
+            bg-slate-900/60 backdrop-blur-sm"
+     role="dialog" aria-modal="true" aria-labelledby="modal-title">
+
+    <!-- Sheet / Card -->
+    <div class="w-full sm:max-w-md bg-white rounded-t-3xl sm:rounded-2xl
+                shadow-2xl p-6 animate-slide-up">
+
+        <!-- Header -->
+        <div class="flex items-start justify-between mb-5">
+            <div>
+                <p class="text-xs text-slate-400 font-medium uppercase tracking-widest mb-0.5">
+                    Instant Purchase
+                </p>
+                <h2 id="modal-title" class="text-xl font-extrabold text-slate-900 leading-snug">
+                    <span id="modal-pkg-name"></span>
+                </h2>
+                <p class="text-sm text-slate-500 mt-0.5" id="modal-pkg-desc"></p>
+            </div>
+            <button id="btn-close-modal"
+                    aria-label="Close"
+                    class="ml-4 flex-shrink-0 w-8 h-8 flex items-center justify-center
+                           rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500
+                           text-sm transition-colors">
+                ✕
+            </button>
+        </div>
+
+        <!-- Price highlight -->
+        <div class="bg-indigo-50 rounded-2xl px-4 py-3 mb-5 flex items-center justify-between">
+            <span class="text-sm text-indigo-700 font-medium">Total amount</span>
+            <span id="modal-pkg-price"
+                  class="text-2xl font-extrabold text-indigo-700"></span>
+        </div>
+
+        <!-- Phone number input -->
+        <label class="block mb-4">
+            <span class="text-sm font-semibold text-slate-700 mb-1.5 block">
+                Phone number to receive bundle
+            </span>
+            <div class="relative">
+                <span class="absolute inset-y-0 left-3 flex items-center text-slate-400
+                             text-sm pointer-events-none">
+                    🇰🇪
+                </span>
+                <input id="phone-input"
+                       type="tel"
+                       inputmode="tel"
+                       placeholder="+254 7XX XXX XXX"
+                       autocomplete="tel"
+                       class="w-full pl-10 pr-4 py-3 text-sm rounded-xl border border-slate-200
+                              focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400
+                              transition-all placeholder-slate-300" />
+            </div>
+            <p class="text-xs text-slate-400 mt-1.5">
+                A payment prompt will be sent to this number via M-Pesa.
+            </p>
+        </label>
+
+        <!-- CTA -->
+        <button id="btn-buy"
+                class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 active:scale-95
+                       text-white text-base font-bold rounded-xl transition-all duration-150
+                       shadow-md shadow-indigo-200">
+            Confirm Purchase
+        </button>
+
+        <p class="text-center text-xs text-slate-400 mt-3">
+            Secured by M-Pesa STK Push · Instant activation
+        </p>
+    </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     TOAST NOTIFICATION
+═══════════════════════════════════════════════════════════ -->
+<div id="toast"
+     class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-xl
+            text-sm font-medium shadow-lg opacity-0 pointer-events-none
+            transition-all duration-300">
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     BOTTOM NAV (mobile)
+═══════════════════════════════════════════════════════════ -->
+<nav class="fixed bottom-0 inset-x-0 z-20 bg-white border-t border-slate-100 shadow-up
+            flex items-center justify-around py-2 sm:hidden">
+
+    <button class="flex flex-col items-center gap-0.5 px-3 py-1.5
+                   text-indigo-600 font-semibold" aria-current="page">
+        <span class="text-xl">🏠</span>
+        <span class="text-[10px]">Bundles</span>
+    </button>
+
+    <button class="flex flex-col items-center gap-0.5 px-3 py-1.5 text-slate-400">
+        <span class="text-xl">📋</span>
+        <span class="text-[10px]">History</span>
+    </button>
+
+    <button class="flex flex-col items-center gap-0.5 px-3 py-1.5 text-slate-400">
+        <span class="text-xl">💰</span>
+        <span class="text-[10px]">Wallet</span>
+    </button>
+
+    <button class="flex flex-col items-center gap-0.5 px-3 py-1.5 text-slate-400">
+        <span class="text-xl">👤</span>
+        <span class="text-[10px]">Account</span>
+    </button>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FOOTER — DataHub branding + support + info
+═══════════════════════════════════════════════════════════ -->
+<footer class="bg-gradient-to-b from-indigo-800 to-indigo-900 text-white shadow-md mt-10">
+
+    <div class="max-w-3xl mx-auto px-4 py-6 space-y-6">
+
+        <!-- Brand + status -->
+        <div class="flex items-center justify-between">
+
+            <!-- Brand -->
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center
+                            text-lg font-black leading-none select-none">
+                    N
+                </div>
+                <span class="font-extrabold text-lg tracking-tight">NexcoWireless</span>
+            </div>
+
+           <!-- Network status -->
+            <div class="flex items-center gap-1.5 bg-white/15 rounded-full px-3 py-1">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full
+                                 bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                </span>
+                <span class="text-xs font-semibold">4G · <span id="net-speedd">90</span>Mbps</span>
+            </div>
+        </div>
+
+       <!-- Value message -->
+<div class="text-center">
+    <p class="text-indigo-200 text-sm font-medium mb-1">
+        Trusted connectivity across East Africa
+    </p>
+
+    <h2 class="text-xl sm:text-2xl font-extrabold leading-tight">
+        Powered by Starlink Infrastructure<br/>
+        <span class="text-indigo-300">& Leading Regional Networks</span>
+    </h2>
+
+    <p class="mt-2 text-indigo-300 text-xs">
+        Supporting Safaricom · Airtel · Telkom · MTN · Zain and other major carriers
+    </p>
+</div>
+
+        <!-- Support / links -->
+        <div class="grid grid-cols-2 gap-4 text-sm">
+
+            <!-- Support -->
+            <div class="space-y-2">
+                <h3 class="font-bold text-white">Support</h3>
+
+                <a href="tel:+254780000700"
+                   class="flex items-center gap-2 text-indigo-200 hover:text-white">
+                    <i class="fa-solid fa-phone"></i>
+                    Call Support
+                </a>
+
+                <a href="mailto:support@nexconetworks.com"
+                   class="flex items-center gap-2 text-indigo-200 hover:text-white">
+                    <i class="fa-solid fa-envelope"></i>
+                    Email Us
+                </a>
+
+                <a href="#"
+                   class="flex items-center gap-2 text-indigo-200 hover:text-white">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    WhatsApp Help
+                </a>
+            </div>
+
+            <!-- Quick links -->
+            <div class="space-y-2">
+                <h3 class="font-bold text-white">Quick Links</h3>
+
+                <a href="#" class="block text-indigo-200 hover:text-white">Buy Bundles</a>
+                <a href="#" class="block text-indigo-200 hover:text-white">Transaction History</a>
+                <a href="faqs.html" class="block text-indigo-200 hover:text-white">FAQs</a>
+            </div>
+
+        </div>
+
+        <!-- Bottom bar -->
+<div class="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-indigo-300">
+
+    <span>© 2026 NexcoWireless. All rights reserved.</span>
+
+    <span class="flex items-center gap-2">
+        <img src="../img/africa.jpg"
+             alt="Secure Payments"
+             class="h-7 w-auto object-contain" />
+        <span>Secure Payments</span>
+    </span>
+
+</div>
+
+    </div>
+</footer>
+<script src="js/app.js" type="module"></script>
+<script>
+function createNetworkAnimation(
+    elementId,
+    startSpeed,
+    maxSpeed,
+    stableMin,
+    stableMax
+) {
+    const display = document.getElementById(elementId);
+
+    let current = startSpeed;
+    let target = maxSpeed;
+
+    function animateToTarget() {
+        const start = current;
+        const end = target;
+        let startTime = null;
+
+        function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+
+            const progress = Math.min(
+                (timestamp - startTime) / 1200,
+                1
+            );
+
+            // Smooth ease-out animation
+            const eased = 1 - Math.pow(1 - progress, 3);
+
+            const value = start + (end - start) * eased;
+
+            display.textContent = Math.round(value);
+
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                current = end;
+            }
+        }
+
+        requestAnimationFrame(step);
+    }
+
+    setInterval(() => {
+        if (current < maxSpeed) {
+            target = Math.min(
+                maxSpeed,
+                current + (Math.random() * 3 + 1)
+            );
+        } else {
+            target =
+                stableMin +
+                Math.random() * (stableMax - stableMin);
+        }
+
+        animateToTarget();
+    }, 1200);
+}
+
+/* 5G */
+createNetworkAnimation(
+    "net-speed", // element id
+    217,          // start
+    230,          // max
+    227,          // stable min
+    231           // stable max
+);
+
+/* 4G */
+createNetworkAnimation(
+    "net-speedd", // element id
+    197,           // start
+    214,           // max
+    209,           // stable min
+    214            // stable max
+);
+</script>
+</body>
+</html>
