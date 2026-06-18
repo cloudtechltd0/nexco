@@ -51,7 +51,7 @@ app = FastAPI(
 # Allow the HTML/JS frontend (served from any origin during dev, tighten in prod)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],          # restrict to your domain in production
+    allow_origins=["https://nexcowireless.vercel.app"],          # restrict to your domain in production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
