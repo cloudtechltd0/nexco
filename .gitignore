@@ -1,0 +1,3 @@
+backend/.env 
+backend/telecom.db 
+__pycache__/ 
