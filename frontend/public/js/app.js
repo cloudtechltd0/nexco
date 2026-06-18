@@ -13,7 +13,7 @@
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 
-const API_BASE = "http://localhost:8000";   // swap to your deployed URL in prod
+const API_BASE = "https://nexco-tno9.onrender.com";   // swap to your deployed URL in prod
 
 // ─── State ────────────────────────────────────────────────────────────────────
 
