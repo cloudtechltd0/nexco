@@ -460,7 +460,7 @@ async def buy_package(
 
     if not user:
         user = User(
-            username=f"user_{payload.phone_number[-4:]}",
+            username=f"user_{uuid.uuid4().hex[:8]}"
             phone_number=payload.phone_number,
             balance=0.0,
         )
